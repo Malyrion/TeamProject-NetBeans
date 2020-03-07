@@ -15,6 +15,10 @@ Usefull commands:
 1) Creating a new branch to make changes without affecting the main branch:
     
     git checkout -b "Branch Name" //without ""
+    
+    to delete:
+      git push -d origin "Branch Name"
+
 2) when making changes:
    
    git add .
