@@ -19,7 +19,7 @@ Usefull commands:
    
    git add .
   
-   git commit
+   git commit -m "Message explaining the changes"
    
    git push
    
