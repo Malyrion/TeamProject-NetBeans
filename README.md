@@ -9,3 +9,21 @@ The folder includes the Netbeans project called java_system
   
  You should also install XAMPP Controle Panel and start Apache and mySql connections by pressing the start buttons.
   
+Usefull commands:
+1) Creating a new branch to make changes without affecting the main branch:
+    
+    git checkout "Branch Name" //without ""
+2) when making changes:
+   
+   git add .
+  
+   git commit
+   
+   git push
+   
+   3) Other usefull commands
+   
+   git status
+   
+   git log
+   
