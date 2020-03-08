@@ -353,6 +353,7 @@ public class travelAd extends javax.swing.JFrame {
         lf.setLocationRelativeTo(null);
         this.dispose();   
         
+        
     }//GEN-LAST:event_LogOutButtonActionPerformed
 
     /**
