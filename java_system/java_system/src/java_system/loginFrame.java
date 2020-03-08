@@ -133,15 +133,20 @@ public class loginFrame extends javax.swing.JFrame {
                 systemAdmin admin = new systemAdmin();
                 admin.setVisible(true);
                 this.setVisible(false);
+                admin.setLocationRelativeTo(null);
             }else if(jComboBoxUserType.getSelectedIndex()==1){
                 officeManager manager = new officeManager();
                 manager.setVisible(true);
                 this.setVisible(false);
+                manager.setLocationRelativeTo(null);
                 
             } else{
                 travelAd advisor = new travelAd();
                 advisor.setVisible(true);
-                this.setVisible(false);} 
+                this.setVisible(false);
+                advisor.setLocationRelativeTo(null);
+            } 
+            
             }
             else{
                 JOptionPane.showMessageDialog(this, "Username and Password doesn't match");}
