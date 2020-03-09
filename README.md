@@ -14,7 +14,16 @@ The folder includes the Netbeans project called java_system
 Usefull commands:
 1) Creating a new branch to make changes without affecting the main branch:
     
+    select a folder
+    
     git checkout -b "Branch Name" //without ""
+    
+    git add .
+    
+    git commit -m"message"
+    
+    git push  (use the console comand that is suggested) 
+    
     
     to delete:
       git push -d origin "Branch Name"
