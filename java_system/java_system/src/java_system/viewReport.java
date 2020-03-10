@@ -41,7 +41,7 @@ public class viewReport extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        LogOutButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -151,7 +151,12 @@ public class viewReport extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jButton7.setText("Log Out");
+        LogOutButton.setText("Log Out");
+        LogOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOutButtonActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("StaffID:");
 
@@ -167,7 +172,7 @@ public class viewReport extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton7)
+                        .addComponent(LogOutButton)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -197,7 +202,7 @@ public class viewReport extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addGap(16, 16, 16)
-                .addComponent(jButton7)
+                .addComponent(LogOutButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -215,12 +220,28 @@ public class viewReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+        officeManager om = new officeManager();
+        om.setVisible(true);
+        om.pack();
+        om.setLocationRelativeTo(null);
+        
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void LogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutButtonActionPerformed
+
+        loginFrame lf = new loginFrame();
+        lf.setVisible(true);
+        lf.pack();
+        lf.setLocationRelativeTo(null);
+        
+        this.dispose();
+    }//GEN-LAST:event_LogOutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,13 +279,13 @@ public class viewReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LogOutButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
