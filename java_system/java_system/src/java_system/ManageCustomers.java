@@ -113,6 +113,11 @@ public class ManageCustomers extends javax.swing.JFrame {
         jLabel9.setText("Address:");
 
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -415,11 +420,20 @@ public class ManageCustomers extends javax.swing.JFrame {
 
     private void CreateCustomerNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCustomerNameFieldActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_CreateCustomerNameFieldActionPerformed
 
     private void CreateCustomerSurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCustomerSurnameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CreateCustomerSurnameFieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        INSERT INTO `customer`(`customerID`, `addressID`, `discountRateID`, `firstName`, `lastName`, `DOB`, `telephone`, `email`, `isValued`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9])
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
