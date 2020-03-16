@@ -19,7 +19,7 @@ public class MyConnection {
         Connection con=null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost/projectdatabase","root","");
+            con=DriverManager.getConnection("jdbc:mysql://localhost/java_system_db","root","");
         }catch (Exception ex){
             System.out.println(ex.getMessage());
         }

@@ -5,6 +5,12 @@
  */
 package java_system;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -431,8 +437,47 @@ public class ManageCustomers extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        INSERT INTO `customer`(`customerID`, `addressID`, `discountRateID`, `firstName`, `lastName`, `DOB`, `telephone`, `email`, `isValued`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9])
+          String fname=CashNameField.getText();
+          String lname=CashSurnameField.getText();
         
+        // geting varibles for integers
+        int camount= Integer.parseInt(CashAmountField.getText());
+       
+        //Date Problem fix !!!
+       // SimpleDateFormat dateformat= new SimpleDateFormat("yyyy-MM-dd");
+       // String  bdate= dateformat.format(CardPaymentDateField.getDate());
+        
+       //seting database link and which action to do
+       PreparedStatement ps;
+       String query= "INSERT INTO `customer`(`customerID`, `addressID`, `discountRateID`, `firstName`, `lastName`, `DOB`, `telephone`, `email`, `isValued`) VALUES ([-1],[-2],[-3],[-4],[-5],[-6],[-7],[-8],[-9])";
+     try{
+            
+         ps=MyConnection.getConnection().prepareStatement(query);
+         
+         ps.setString(1,fname);
+         ps.setString(2,lname);
+         ps.setInt(3,-1);
+         ps.setInt(4,-1);
+         ps.setInt(5,camount);
+         ps.setString(6,"2000-12-23");
+         ps.setString(7,"cash");
+         ps.setString(8,"2000-12-23");
+         
+         if(ps.executeUpdate()>0){
+             JOptionPane.showMessageDialog(null,"New User Payment Recorded");
+         }
+         
+     }catch (SQLException ex){
+         Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
+         
+     }
+    }                                                
+        
+        
+        
+        
+        
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -5,10 +5,9 @@
  */
 package java_system;
 
-import java.sql.DriverManager;
+import static java.lang.Math.random;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -316,19 +315,21 @@ public class RecordPayment extends javax.swing.JFrame {
         
        //seting database link and which action to do
        PreparedStatement ps;
-       String query="INSERT INTO `record_payment`(`name`, `surname`, `cardNumber`, `cvv`, `amount`, `date`, `paymentType`, `ExpairyDate`) VALUES (?,?,?,?,?,?,?,?)";
+       String query="INSERT INTO `paymentdetails`(`customerID`, `tickedID`, `title`, `ExpiryDate`, `CVV`, `firstName`, `lastName`, `paymentType`, `cardNumber`, `amount`) VALUES (?,?,?,?,?,?,?,?,?,?)";
      try{
             
          ps=MyConnection.getConnection().prepareStatement(query);
          
-         ps.setString(1,fname);
-         ps.setString(2,lname);
-         ps.setInt(3,cnumber);
-         ps.setInt(4,cvv);
-         ps.setInt(5,camount);
-         ps.setString(6,"2000-12-23");
-         ps.setString(7,"card");
-         ps.setString(8,"2000-12-23");
+         ps.setString(6,fname);
+         ps.setString(7,lname);
+         ps.setInt(9,cnumber);
+         ps.setInt(5,cvv);
+         ps.setInt(10,camount);
+         ps.setString(4,"2000-12-23");
+         ps.setString(8,"card");
+         ps.setString(3,"Mr");
+         ps.setInt(1,(int) (Math.random() * ( 000 - 999 )));
+         ps.setInt(2,(int) (Math.random() * ( 000 - 999 )));
          
          if(ps.executeUpdate()>0){
              JOptionPane.showMessageDialog(null,"New User Payment Recorded");
@@ -363,19 +364,22 @@ public class RecordPayment extends javax.swing.JFrame {
         
        //seting database link and which action to do
        PreparedStatement ps;
-       String query="INSERT INTO `record_payment`(`name`, `surname`, `cardNumber`, `cvv`, `amount`, `date`, `paymentType`, `ExpairyDate`) VALUES (?,?,?,?,?,?,?,?)";
+       String query="INSERT INTO `paymentdetails`(`customerID`, `tickedID`, `title`, `ExpiryDate`, `CVV`, `firstName`, `lastName`, `paymentType`, `cardNumber`, `amount`) VALUES (?,?,?,?,?,?,?,?,?,?)";
      try{
             
          ps=MyConnection.getConnection().prepareStatement(query);
          
-         ps.setString(1,fname);
-         ps.setString(2,lname);
-         ps.setInt(3,-1);
-         ps.setInt(4,-1);
-         ps.setInt(5,camount);
-         ps.setString(6,"2000-12-23");
-         ps.setString(7,"cash");
-         ps.setString(8,"2000-12-23");
+         
+         ps.setString(6,fname);
+         ps.setString(7,lname);
+         ps.setInt(9,-1);
+         ps.setInt(5,-1);
+         ps.setInt(10,camount);
+         ps.setString(4,"2000-12-23");
+         ps.setString(8,"cash");
+         ps.setString(3,"Mr");
+         ps.setInt(1, (int) (Math.random() * ( 000 - 999 )));
+         ps.setInt(2,(int) (Math.random() * ( 999 -000  )));
          
          if(ps.executeUpdate()>0){
              JOptionPane.showMessageDialog(null,"New User Payment Recorded");
