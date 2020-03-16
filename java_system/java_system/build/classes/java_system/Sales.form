@@ -148,7 +148,7 @@
                                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="SaveCustomerButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CreateCustomerNameField" alignment="0" pref="81" max="32767" attributes="0"/>
+                                  <Component id="CreateCustomerNameField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="CreateCustomerSurnameField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="CreateCustomerAddressField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="CreateCustomerDOBField" alignment="0" max="32767" attributes="0"/>

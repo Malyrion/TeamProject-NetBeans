@@ -14,10 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Vu Pham
- */
+
 public class loginFrame extends javax.swing.JFrame {
     
     Connection con = null;
@@ -119,7 +116,7 @@ public class loginFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try{
-            String query = "SELECT * FROM `users` WHERE username =? and password=? and userType =?";
+            String query = "SELECT * FROM `staff` WHERE username =? and passwordHash=? and role =?";
             con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
             pst = con.prepareStatement(query);
             pst.setString(1,jTextFieldUsername.getText());
@@ -127,7 +124,7 @@ public class loginFrame extends javax.swing.JFrame {
             pst.setString(3, String.valueOf(jComboBoxUserType.getSelectedItem()));
             rs = pst.executeQuery();
             if(rs.next()){
-                JOptionPane.showMessageDialog(this, "Username and Password is correct and you are logged as "+rs.getString("userType"));
+                JOptionPane.showMessageDialog(this, "Username and Password is correct and you are logged as "+rs.getString("role"));
             if(jComboBoxUserType.getSelectedIndex()==0){
                 
                 systemAdmin admin = new systemAdmin();

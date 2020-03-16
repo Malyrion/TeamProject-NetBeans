@@ -5,6 +5,13 @@
  */
 package java_system;
 
+import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+
 /**
  *
  * @author ASUS
@@ -37,13 +44,15 @@ public class ManageCustomers extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         CreateCustomerSurnameField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        CreateCustomerIDField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         CreateCustomerDOBField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         CreateCustomerAddressField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        SaveButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        CreateCustomerTelephone = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        CreateCustomerEmail = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         FindCustomerIDField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -106,13 +115,32 @@ public class ManageCustomers extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("CusotomerID:");
-
         jLabel8.setText("DOB:");
 
         jLabel9.setText("Address:");
 
-        jButton1.setText("Save");
+        SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Telephone");
+
+        CreateCustomerTelephone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateCustomerTelephoneActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Email");
+
+        CreateCustomerEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateCustomerEmailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -120,27 +148,36 @@ public class ManageCustomers extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CreateCustomerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CreateCustomerDOBField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CreateCustomerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CreateCustomerSurnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CreateCustomerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGap(81, 81, 81)
                             .addComponent(jLabel2))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGap(31, 31, 31)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(53, 53, 53)
-                            .addComponent(jButton1))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(CreateCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel9)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel15))
+                                    .addGap(0, 0, Short.MAX_VALUE)))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(CreateCustomerDOBField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                        .addComponent(CreateCustomerSurnameField, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(CreateCustomerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CreateCustomerTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(86, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(SaveButton)
+                .addGap(117, 117, 117))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,25 +188,29 @@ public class ManageCustomers extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CreateCustomerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CreateCustomerSurnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CreateCustomerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addComponent(CreateCustomerDOBField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(9, 9, 9)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CreateCustomerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(53, 53, 53))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(CreateCustomerTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addComponent(CreateCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(SaveButton)
+                .addGap(42, 42, 42))
         );
 
         jPanel3.setBackground(new java.awt.Color(51, 255, 51));
@@ -265,7 +306,7 @@ public class ManageCustomers extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SetFixedDiscountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,7 +400,7 @@ public class ManageCustomers extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(LogOutButton))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -373,8 +414,7 @@ public class ManageCustomers extends javax.swing.JFrame {
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 19, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -388,7 +428,7 @@ public class ManageCustomers extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -420,6 +460,57 @@ public class ManageCustomers extends javax.swing.JFrame {
     private void CreateCustomerSurnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCustomerSurnameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CreateCustomerSurnameFieldActionPerformed
+
+    private void CreateCustomerTelephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCustomerTelephoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreateCustomerTelephoneActionPerformed
+
+    private void CreateCustomerEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCustomerEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreateCustomerEmailActionPerformed
+
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+
+        
+        String firstName = CreateCustomerNameField.getText();
+        String lastName = CreateCustomerSurnameField.getText();
+        String DOB = CreateCustomerDOBField.getText();
+        String address = CreateCustomerAddressField.getText();
+        String telephone = CreateCustomerTelephone.getText();
+        String email = CreateCustomerEmail.getText();
+        
+       // SimpleDateFormat dateformat= new SimpleDateFormat("yyyy-MM-dd");
+       // String  bdate= dateformat.format(CardPaymentDateField.getDate());
+        
+       //seting database link and which action to do
+       PreparedStatement ps;
+       String query= "INSERT INTO `customers`(`customerID`, `discountRateID`, `firstName`, `lastName`, `address`, `DOB`, `telephone`, `email`, `isValued`) VALUES (?,?,?,?,?,?,?,?,?)";
+
+     try{
+            
+         ps=MyConnection.getConnection().prepareStatement(query);
+         
+         ps.setInt(1,321);
+         ps.setInt(2,1);
+         ps.setString(3, firstName);
+         ps.setString(4,lastName);
+         ps.setString(5,address);
+         ps.setString(6,"2000-12-23");
+         ps.setInt(7,03233331);
+         ps.setString(8,email);
+         ps.setInt(9, 1);
+            
+         
+         if(ps.executeUpdate()>0){
+             JOptionPane.showMessageDialog(null,"Customer Created");
+         }
+         
+     }catch (SQLException ex){
+         Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
+         
+     }
+        
+    }//GEN-LAST:event_SaveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -464,17 +555,18 @@ public class ManageCustomers extends javax.swing.JFrame {
     private javax.swing.JTextField ChangeSurnameField;
     private javax.swing.JTextField CreateCustomerAddressField;
     private javax.swing.JTextField CreateCustomerDOBField;
-    private javax.swing.JTextField CreateCustomerIDField;
+    private javax.swing.JTextField CreateCustomerEmail;
     private javax.swing.JTextField CreateCustomerNameField;
     private javax.swing.JTextField CreateCustomerSurnameField;
+    private javax.swing.JTextField CreateCustomerTelephone;
     private javax.swing.JTextField FindCustomerIDField;
     private javax.swing.JButton FixedDiscountButton;
     private javax.swing.JButton FlexDiscountButton;
     private javax.swing.JTextField FlexDiscountField;
     private javax.swing.JButton LogOutButton;
     private javax.swing.JButton MainPageButton;
+    private javax.swing.JButton SaveButton;
     private javax.swing.JTextField SetFixedDiscountField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -482,11 +574,12 @@ public class ManageCustomers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

@@ -680,7 +680,7 @@ loginFrame lf = new loginFrame();
         
        //seting database link and which action to do
        PreparedStatement ps;
-       String query="INSERT INTO `customer`(`customerID`, `addressID`, `discountRateID`, `name`, `surname`, `DOB`, `telephone`, `email`, `isValued`) VALUES (?,?,?,?,?,?,?,?,?)";
+       String query="INSERT INTO `customers`(`customerID`, `addressID`, `discountRateID`, `name`, `surname`, `DOB`, `telephone`, `email`, `isValued`) VALUES (?,?,?,?,?,?,?,?,?)";
      try{
             
          ps=MyConnection.getConnection().prepareStatement(query);
