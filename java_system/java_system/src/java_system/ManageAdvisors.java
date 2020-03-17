@@ -5,11 +5,15 @@
  */
 package java_system;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +24,10 @@ public class ManageAdvisors extends javax.swing.JFrame {
     /**
      * Creates new form ManageAdvisors
      */
+    
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     public ManageAdvisors() {
         initComponents();
     }
@@ -58,13 +66,14 @@ public class ManageAdvisors extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         ComboBoxRole = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        AdvisorTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
+        RemoveStaffIDTextField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        ViewAdvisorTable = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -199,12 +208,9 @@ public class ManageAdvisors extends javax.swing.JFrame {
                 .addGap(8, 8, 8))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        AdvisorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "StaffID", "Name", "Surname", "Address"
@@ -218,7 +224,7 @@ public class ManageAdvisors extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(AdvisorTable);
 
         jLabel8.setText("Advisor Table:");
 
@@ -226,9 +232,9 @@ public class ManageAdvisors extends javax.swing.JFrame {
 
         jButton3.setText("Remove");
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        RemoveStaffIDTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                RemoveStaffIDTextFieldActionPerformed(evt);
             }
         });
 
@@ -242,7 +248,7 @@ public class ManageAdvisors extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RemoveStaffIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addContainerGap())
@@ -255,7 +261,7 @@ public class ManageAdvisors extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField7)
+                            .addComponent(RemoveStaffIDTextField)
                             .addComponent(jLabel10)))
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -263,6 +269,13 @@ public class ManageAdvisors extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setText("Manage Advisors");
+
+        ViewAdvisorTable.setText("View Advisor Table");
+        ViewAdvisorTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewAdvisorTableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,11 +287,13 @@ public class ManageAdvisors extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel9)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jLabel8)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel9)
+                        .addComponent(jScrollPane2)
+                        .addComponent(jLabel8)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ViewAdvisorTable))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -294,7 +309,9 @@ public class ManageAdvisors extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98)
+                        .addGap(18, 18, 18)
+                        .addComponent(ViewAdvisorTable)
+                        .addGap(51, 51, 51)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -306,9 +323,9 @@ public class ManageAdvisors extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void RemoveStaffIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveStaffIDTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_RemoveStaffIDTextFieldActionPerformed
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         // TODO add your handling code here:
@@ -351,6 +368,33 @@ public class ManageAdvisors extends javax.swing.JFrame {
      }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
+    private void ViewAdvisorTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAdvisorTableActionPerformed
+        // TODO add your handling code here:
+        
+       DefaultTableModel tableModel = (DefaultTableModel) AdvisorTable.getModel();
+        try{
+        
+            String query = "SELECT staffID, firstName, lastName, address FROM staff";
+            con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
+            pst = con.prepareStatement(query);
+            rs = pst.executeQuery();
+            
+            while (rs.next())
+            {
+                
+                int staffID = rs.getInt("staffID");
+                tableModel.addRow(new Object[]{staffID});
+                
+                
+                
+                
+            }
+            
+        } catch (Exception e) {
+           
+        }
+    }//GEN-LAST:event_ViewAdvisorTableActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -387,7 +431,9 @@ public class ManageAdvisors extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AdvisorTable;
     private javax.swing.JComboBox<String> ComboBoxRole;
+    private javax.swing.JTextField RemoveStaffIDTextField;
     private javax.swing.JButton SaveButton;
     private javax.swing.JTextField TextFieldAddress;
     private javax.swing.JTextField TextFieldDOB;
@@ -397,6 +443,7 @@ public class ManageAdvisors extends javax.swing.JFrame {
     private javax.swing.JTextField TextFieldSurname;
     private javax.swing.JTextField TextFieldTelephone;
     private javax.swing.JTextField TextFieldUsername;
+    private javax.swing.JButton ViewAdvisorTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -416,8 +463,6 @@ public class ManageAdvisors extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }
