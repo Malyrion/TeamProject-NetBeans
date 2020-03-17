@@ -7,6 +7,7 @@ package java_system;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -46,12 +47,12 @@ public class Sales extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         CreateCustomerAddressField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        CreateCustomerDOBField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         CreateCustomerTelephoneField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         CreateCustomerEmailField = new javax.swing.JTextField();
         SaveCustomerButton = new javax.swing.JButton();
+        CreateCustomerDOBField = new org.jdesktop.swingx.JXDatePicker();
         jPanel3 = new javax.swing.JPanel();
         UpdateCustomerIDField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -142,12 +143,6 @@ public class Sales extends javax.swing.JFrame {
 
         jLabel6.setText("Date Of Birth:");
 
-        CreateCustomerDOBField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateCustomerDOBFieldActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("Telephone:");
 
         CreateCustomerTelephoneField.addActionListener(new java.awt.event.ActionListener() {
@@ -178,27 +173,32 @@ public class Sales extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(CreateCustomerNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                            .addComponent(CreateCustomerSurnameField)
-                            .addComponent(CreateCustomerAddressField)
-                            .addComponent(CreateCustomerDOBField)
-                            .addComponent(CreateCustomerTelephoneField)
-                            .addComponent(CreateCustomerEmailField)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(SaveCustomerButton)))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(CreateCustomerNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                                    .addComponent(CreateCustomerSurnameField)
+                                    .addComponent(CreateCustomerAddressField)
+                                    .addComponent(CreateCustomerTelephoneField)
+                                    .addComponent(CreateCustomerEmailField)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(SaveCustomerButton)))))
+                        .addGap(0, 22, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(CreateCustomerDOBField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +218,7 @@ public class Sales extends javax.swing.JFrame {
                 .addComponent(CreateCustomerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addComponent(CreateCustomerDOBField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
@@ -269,6 +269,7 @@ public class Sales extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ChangeDetailsButton)
                     .addComponent(ChangeSurnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChangeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UpdateCustomerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,9 +280,6 @@ public class Sales extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addComponent(jLabel10)
                                 .addComponent(jLabel11)))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(33, 33, 33)
-                            .addComponent(ChangeDetailsButton))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGap(54, 54, 54)
                             .addComponent(jLabel20))))
@@ -303,9 +301,9 @@ public class Sales extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ChangeSurnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(ChangeDetailsButton)
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
@@ -375,19 +373,14 @@ public class Sales extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RecordTicketButton)
-                            .addComponent(BlankIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(RecordTicketButton)
+                    .addComponent(jLabel18)
+                    .addComponent(BlankIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,9 +393,9 @@ public class Sales extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BlankIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(RecordTicketButton)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(204, 255, 204));
@@ -446,7 +439,7 @@ public class Sales extends javax.swing.JFrame {
             }
         });
 
-        jLabel21.setText("Flight Details");
+        jLabel21.setText("Assign Coupon");
 
         CouponTypeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -470,9 +463,6 @@ public class Sales extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel21))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -498,8 +488,11 @@ public class Sales extends javax.swing.JFrame {
                         .addComponent(BlankIDField1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel22)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(jLabel22))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel21)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -612,7 +605,7 @@ public class Sales extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(55, 55, 55)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -674,10 +667,6 @@ loginFrame lf = new loginFrame();
     private void CreateCustomerAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCustomerAddressFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CreateCustomerAddressFieldActionPerformed
-
-    private void CreateCustomerDOBFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCustomerDOBFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CreateCustomerDOBFieldActionPerformed
 
     private void CreateCustomerTelephoneFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateCustomerTelephoneFieldActionPerformed
         // TODO add your handling code here:
@@ -744,8 +733,8 @@ loginFrame lf = new loginFrame();
         // geting varibles for integers
         //Date Problem fix !!!
         
-       // SimpleDateFormat dateformat= new SimpleDateFormat("yyyy-MM-dd");
-       // String  bdate= dateformat.format(CardPaymentDateField.getDate());
+        SimpleDateFormat dateformat= new SimpleDateFormat("yyyy-MM-dd");
+        String  bdate= dateformat.format(CreateCustomerDOBField.getDate());
         
        //seting database link and which action to do
        PreparedStatement ps;
@@ -754,11 +743,11 @@ loginFrame lf = new loginFrame();
             
          ps=MyConnection.getConnection().prepareStatement(query);
          
-         ps.setInt(1,-1);
-         ps.setInt(2,-1);
+         ps.setInt(1,(int) (Math.random() * ( 999 -000  )));
+         ps.setInt(2,(int) (Math.random() * ( 999 -000  )));
          ps.setString(3,fname);
          ps.setString(4,lname);
-         ps.setString(5,"2000-12-23");
+         ps.setString(5,bdate);
          ps.setString(7,email);
          ps.setString(6,telephone);
          ps.setBoolean(8,false);
@@ -871,7 +860,7 @@ loginFrame lf = new loginFrame();
     private javax.swing.JTextField ChangeSurnameField;
     private javax.swing.JTextField CouponTypeField;
     private javax.swing.JTextField CreateCustomerAddressField;
-    private javax.swing.JTextField CreateCustomerDOBField;
+    private org.jdesktop.swingx.JXDatePicker CreateCustomerDOBField;
     private javax.swing.JTextField CreateCustomerEmailField;
     private javax.swing.JTextField CreateCustomerNameField;
     private javax.swing.JTextField CreateCustomerSurnameField;
