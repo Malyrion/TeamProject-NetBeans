@@ -14,6 +14,7 @@ import java.sql.DriverManager;
  */
 public class MyConnection {
     
+    Connection con=null;
     public static Connection getConnection(){
         
         Connection con=null;

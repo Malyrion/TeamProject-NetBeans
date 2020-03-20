@@ -29,7 +29,41 @@ public class ManageAdvisors extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     public ManageAdvisors() {
+        
         initComponents();
+    }
+    
+    public void Refresh(){
+        DefaultTableModel tableModel = (DefaultTableModel) AdvisorTable.getModel();
+        try{
+        
+            String query = "SELECT staffID, firstName, lastName, address, email, telephone,username,password FROM staff";
+            con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
+            pst = con.prepareStatement(query);
+            rs = pst.executeQuery();
+            
+            
+            while (rs.next())
+            {
+                
+                int staffID = rs.getInt("staffID");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String address = rs.getString("address");
+                String email = rs.getString("email");
+                String telephone = rs.getString("telephone");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+              //  String role = (Strig)ComboBoxRole.getSelectedItem();
+
+                 
+
+                tableModel.addRow(new Object[]{staffID,firstName,lastName,address,email,telephone,username,password});
+            }
+            
+        } catch (Exception e) {
+           
+        }
     }
 
     /**
@@ -65,13 +99,11 @@ public class ManageAdvisors extends javax.swing.JFrame {
         TextFieldPassword = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         ComboBoxRole = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        RemoveIcon = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         AdvisorTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        RemoveStaffIDTextField = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         ViewAdvisorTable = new javax.swing.JButton();
 
@@ -88,6 +120,12 @@ public class ManageAdvisors extends javax.swing.JFrame {
         jLabel1.setText("Create Advisor");
 
         jLabel2.setText("Name:");
+
+        TextFieldName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextFieldNameActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Surname:");
 
@@ -114,28 +152,28 @@ public class ManageAdvisors extends javax.swing.JFrame {
 
         ComboBoxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System_Administrator", "Office_Manager", "Travel_Advisor" }));
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 5)); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/java_system/refresh.png"))); // NOI18N
+        jLabel14.setText("jLabel14");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+
+        RemoveIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/java_system/sign-delete-icon.png"))); // NOI18N
+        RemoveIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RemoveIconMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(113, 113, 113))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(SaveButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel11))
@@ -147,29 +185,56 @@ public class ManageAdvisors extends javax.swing.JFrame {
                         .addComponent(jLabel13))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ComboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TextFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TextFieldPassword)
+                            .addComponent(TextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TextFieldTelephone, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TextFieldDOB, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TextFieldAddress, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TextFieldSurname, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TextFieldName, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(RemoveIcon)
+                                .addGap(0, 16, Short.MAX_VALUE)))))
+                .addGap(41, 41, 41))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TextFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TextFieldPassword)
-                    .addComponent(TextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TextFieldTelephone, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TextFieldDOB, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TextFieldAddress, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TextFieldSurname, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TextFieldName, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ComboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(SaveButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(RemoveIcon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(TextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
@@ -201,11 +266,11 @@ public class ManageAdvisors extends javax.swing.JFrame {
                 .addComponent(TextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ComboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SaveButton)
-                .addGap(8, 8, 8))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         AdvisorTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -213,59 +278,25 @@ public class ManageAdvisors extends javax.swing.JFrame {
 
             },
             new String [] {
-                "StaffID", "Name", "Surname", "Address"
+                "StaffID", "Name", "Surname", "Address", "Telephone", "Email", "Username", "Password", "Role"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+        AdvisorTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AdvisorTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(AdvisorTable);
 
         jLabel8.setText("Advisor Table:");
-
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton3.setText("Remove");
-
-        RemoveStaffIDTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RemoveStaffIDTextFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setText("StaffID:");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(RemoveStaffIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(RemoveStaffIDTextField)
-                            .addComponent(jLabel10)))
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-        );
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setText("Manage Advisors");
@@ -284,17 +315,23 @@ public class ManageAdvisors extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButton1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
                         .addComponent(jLabel9)
-                        .addComponent(jScrollPane2)
-                        .addComponent(jLabel8)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(ViewAdvisorTable))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 1037, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1302, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ViewAdvisorTable)
+                                    .addComponent(jLabel8))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,29 +340,22 @@ public class ManageAdvisors extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ViewAdvisorTable)
-                        .addGap(51, 51, 51)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void RemoveStaffIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveStaffIDTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RemoveStaffIDTextFieldActionPerformed
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         // TODO add your handling code here:
@@ -335,12 +365,12 @@ public class ManageAdvisors extends javax.swing.JFrame {
         String DOB = TextFieldDOB.getText();
         String email = TextFieldEmail.getText();
         String username = TextFieldUsername.getText();
-        String passwordHash = TextFieldPassword.getText();
+        String password = TextFieldPassword.getText();
         String role = (String)ComboBoxRole.getSelectedItem();
         String telephone = TextFieldTelephone.getText();
         
         PreparedStatement ps;
-        String query = "INSERT INTO `staff`(`staffID`, `commissionRateID`, `firstName`, `lastName`, `username`, `passwordHash`, `DOB`, `telephone`, `role`,`address`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO `staff`(`staffID`, `commissionRateID`, `firstName`, `lastName`, `username`, `password`, `DOB`, `email`, `telephone`, `role`,`address`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
        
         try{
             
@@ -351,12 +381,22 @@ public class ManageAdvisors extends javax.swing.JFrame {
          ps.setString(3, firstName);
          ps.setString(4,lastName);
          ps.setString(5,username);
-         ps.setString(6,passwordHash);
+         ps.setString(6,password);
          ps.setString(7,"2000-10-10");
-         ps.setString(8,telephone);
-         ps.setString(9,role);
-         ps.setString(10,address);
+         ps.setString(8,email);
+         ps.setString(9,telephone);
+         ps.setString(10,role);
+         ps.setString(11,address);
             
+         TextFieldName.setText("");
+         TextFieldSurname.setText("");
+         TextFieldEmail.setText("");
+         TextFieldAddress.setText("");
+         TextFieldTelephone.setText("");
+         TextFieldUsername.setText("");
+         TextFieldPassword.setText("");
+         ComboBoxRole.setSelectedIndex(0);
+         
          
          if(ps.executeUpdate()>0){
              JOptionPane.showMessageDialog(null,"Travel Advisor Created");
@@ -368,30 +408,127 @@ public class ManageAdvisors extends javax.swing.JFrame {
      }
     }//GEN-LAST:event_SaveButtonActionPerformed
 
-    private void ViewAdvisorTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAdvisorTableActionPerformed
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         // TODO add your handling code here:
-        
-       DefaultTableModel tableModel = (DefaultTableModel) AdvisorTable.getModel();
         try{
+            String firstName = TextFieldName.getText();
+            String lastName = TextFieldSurname.getText();
+            String address = TextFieldAddress.getText();
+            String telephone = TextFieldTelephone.getText();
+            String email = TextFieldEmail.getText();
+            String username= TextFieldUsername.getText();
+            String password = TextFieldPassword.getText();
+            
+            String query = "update staff set firstName ='"+firstName+"',lastName = '"+lastName+"', address = '"+address+"', telephone = '"+telephone+"', email = '"+email+"' username = '"+username+"', password = '"+password+"' where firstName ='"+firstName+"' ";
+            pst = con.prepareStatement(query);
+            pst.execute();
+          /*
+            pst.setString(2,TextFieldSurname.getText());
+            pst.setString(3,TextFieldPassword.getText());
+            pst.setString(4,TextFieldEmail.getText());
+            pst.setString(5,TextFieldTelephone.getText());
+            pst.setString(6,TextFieldAddress.getText());
+*/
+
+            JOptionPane.showMessageDialog(null, "Updated");
+            
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
         
-            String query = "SELECT staffID, firstName, lastName, address FROM staff";
-            con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void AdvisorTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdvisorTableMouseClicked
+        // TODO add your handling code here:
+        int row = AdvisorTable.getSelectedRow();
+        String tc = AdvisorTable.getModel().getValueAt(row, 0).toString();
+        try{
+            String query = "SELECT * from staff where staffID=" +tc+"";
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
-            
-            while (rs.next())
-            {
+            DefaultTableModel tm = (DefaultTableModel)AdvisorTable.getModel();
+            if(rs.next()){
+
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String address = rs.getString("address");
+                //date
+                String telephone = rs.getString("telephone");
+                String email = rs.getString("email");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
                 
-                int staffID = rs.getInt("staffID");
-                tableModel.addRow(new Object[]{staffID});
-                
-                
+                TextFieldName.setText(firstName);
+                TextFieldSurname.setText(lastName);
+                TextFieldAddress.setText(address);
+                TextFieldTelephone.setText(telephone);
+                TextFieldEmail.setText(email);
+                TextFieldUsername.setText(username);
+                TextFieldPassword.setText(password);
                 
                 
             }
             
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_AdvisorTableMouseClicked
+
+    private void RemoveIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RemoveIconMouseClicked
+        // TODO add your handling code here:
+        
+        int row = AdvisorTable.getSelectedRow();
+        String cell = AdvisorTable.getModel().getValueAt(row,0).toString();
+        String query = "DELETE FROM staff where staffID = " + cell;
+        try{
+            pst = con.prepareStatement(query);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Deleted Successful");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_RemoveIconMouseClicked
+
+    private void TextFieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextFieldNameActionPerformed
+
+    private void ViewAdvisorTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAdvisorTableActionPerformed
+        // TODO add your handling code here:
+
+        //DefaultTableModel tableModel = (DefaultTableModel) AdvisorTable.getModel();
+        try{
+
+            String query = "SELECT staffID, firstName, lastName, address, email, telephone,username,password FROM staff";
+            con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
+            pst = con.prepareStatement(query);
+            rs = pst.executeQuery();
+            DefaultTableModel tm = (DefaultTableModel) AdvisorTable.getModel();
+            tm.setRowCount(0);
+
+            
+            while (rs.next())
+            {
+
+                int staffID = rs.getInt("staffID");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String address = rs.getString("address");
+                String email = rs.getString("email");
+                String telephone = rs.getString("telephone");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                //  String role = (Strig)ComboBoxRole.getSelectedItem();
+
+                
+                tm.addRow(new Object[]{staffID,firstName,lastName,address,email,telephone,username,password});
+                
+            }
+
         } catch (Exception e) {
-           
+
         }
     }//GEN-LAST:event_ViewAdvisorTableActionPerformed
 
@@ -433,7 +570,7 @@ public class ManageAdvisors extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AdvisorTable;
     private javax.swing.JComboBox<String> ComboBoxRole;
-    private javax.swing.JTextField RemoveStaffIDTextField;
+    private javax.swing.JLabel RemoveIcon;
     private javax.swing.JButton SaveButton;
     private javax.swing.JTextField TextFieldAddress;
     private javax.swing.JTextField TextFieldDOB;
@@ -445,12 +582,11 @@ public class ManageAdvisors extends javax.swing.JFrame {
     private javax.swing.JTextField TextFieldUsername;
     private javax.swing.JButton ViewAdvisorTable;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -460,7 +596,6 @@ public class ManageAdvisors extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
