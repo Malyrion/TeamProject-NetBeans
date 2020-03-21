@@ -285,13 +285,10 @@ public class RecordPayment extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jXDatePicker1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel8))
-                            .addGap(94, 94, 94))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addComponent(CashAmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
@@ -543,17 +540,14 @@ public class RecordPayment extends javax.swing.JFrame {
     private void TableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TableButtonActionPerformed
         // TODO add your handling code here:
        PreparedStatement ps;
-       String query="SELECT ticketID, ts.customerID, amount, amountPaid, isPayed, c.firstName, c.lastName FROM customer AS c INNER JOIN ticketsales AS ts WHERE ts.customerID=c.customerID";
-       PreparedStatement ps1;
+       String query="SELECT ticketID, c.DOB, ts.customerID, amount, amountPaid, isPayed, c.firstName, c.lastName FROM customer AS c INNER JOIN ticketsales AS ts WHERE ts.customerID=c.customerID";
        
      try{  
          ps=MyConnection.getConnection().prepareStatement(query);
-        
          ResultSet rs=ps.executeQuery();
          DefaultTableModel tm=(DefaultTableModel)table1.getModel();
          tm.setRowCount(0); 
          while(rs.next()){
-             
              Object o[]={rs.getInt("customerID"),rs.getInt("ticketID"),rs.getInt("isPayed"),rs.getString("c.firstName"),rs.getString("c.lastName"),rs.getInt("amount"),rs.getInt("amountPaid")};
              tm.addRow(o);
          }  

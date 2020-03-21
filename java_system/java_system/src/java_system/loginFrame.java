@@ -129,7 +129,6 @@ public class loginFrame extends javax.swing.JFrame {
             if(rs.next()){
                 JOptionPane.showMessageDialog(this, "Username and Password is correct and you are logged as "+rs.getString("role"));
             if(jComboBoxUserType.getSelectedIndex()==0){
-                
                 systemAdmin admin = new systemAdmin();
                 admin.setVisible(true);
                 this.setVisible(false);
@@ -139,7 +138,6 @@ public class loginFrame extends javax.swing.JFrame {
                 manager.setVisible(true);
                 this.setVisible(false);
                 manager.setLocationRelativeTo(null);
-                
             } else{
                 travelAd advisor = new travelAd();
                 advisor.setVisible(true);
