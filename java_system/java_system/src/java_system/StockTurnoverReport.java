@@ -38,6 +38,11 @@ public class StockTurnoverReport extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         MainPage.setText("Main Page");
+        MainPage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainPageActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Stock Turnover Report");
@@ -105,6 +110,14 @@ public class StockTurnoverReport extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MainPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainPageActionPerformed
+        // TODO add your handling code here:
+        systemAdmin admin = new systemAdmin();
+                admin.setVisible(true);
+                this.setVisible(false);
+                admin.setLocationRelativeTo(null);
+    }//GEN-LAST:event_MainPageActionPerformed
 
     /**
      * @param args the command line arguments
