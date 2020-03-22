@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -52,7 +53,7 @@ public class manageBlanks extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         AdvisorTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        BlanksTable444 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         MainPageButton = new javax.swing.JButton();
@@ -60,8 +61,17 @@ public class manageBlanks extends javax.swing.JFrame {
         BlanksNumber = new javax.swing.JSpinner();
         BlanksType = new javax.swing.JComboBox<>();
         AddBlanks = new javax.swing.JButton();
+        blankNumberField = new javax.swing.JTextField();
         UpdateAdvisorTable = new javax.swing.JButton();
         UpdateBlanksTable = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        BlanksTable440 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        BlanksTable420 = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        BlanksTable201 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        BlanksTable101 = new javax.swing.JTable();
 
         jButton4.setText("jButton4");
 
@@ -156,12 +166,12 @@ public class manageBlanks extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Advisor Name", "Advisor ID", "Blank Type", "Blank Number"
+                " Name", "Surname", " ID", "Type", "BlankID", "Status"
             }
         ));
         jScrollPane1.setViewportView(AdvisorTable);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        BlanksTable444.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -169,7 +179,7 @@ public class manageBlanks extends javax.swing.JFrame {
                 "Blank Type", "From", "To"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(BlanksTable444);
 
         jLabel6.setText("StaffID:");
 
@@ -189,7 +199,7 @@ public class manageBlanks extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        BlanksType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "444", "420", "201", "101" }));
+        BlanksType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "444", "440", "420", "201", "101" }));
         BlanksType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BlanksTypeActionPerformed(evt);
@@ -208,15 +218,17 @@ public class manageBlanks extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(BlanksType, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
+                .addComponent(BlanksType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(blankNumberField)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BlanksNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(114, 114, 114)
                 .addComponent(AddBlanks)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +236,8 @@ public class manageBlanks extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BlanksNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BlanksType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BlanksType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(blankNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(AddBlanks)
                 .addContainerGap(69, Short.MAX_VALUE))
@@ -244,6 +257,46 @@ public class manageBlanks extends javax.swing.JFrame {
             }
         });
 
+        BlanksTable440.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Blank Type", "From", "To"
+            }
+        ));
+        jScrollPane3.setViewportView(BlanksTable440);
+
+        BlanksTable420.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Blank Type", "From", "To"
+            }
+        ));
+        jScrollPane4.setViewportView(BlanksTable420);
+
+        BlanksTable201.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Blank Type", "From", "To"
+            }
+        ));
+        jScrollPane5.setViewportView(BlanksTable201);
+
+        BlanksTable101.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Blank Type", "From", "To"
+            }
+        ));
+        jScrollPane6.setViewportView(BlanksTable101);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -253,39 +306,57 @@ public class manageBlanks extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(MainPageButton)
-                        .addGap(36, 647, Short.MAX_VALUE))
+                        .addGap(36, 670, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(108, 108, 108))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(UpdateAdvisorTable))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(UpdateAdvisorTable))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 1, Short.MAX_VALUE)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(125, 125, 125))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton5)
+                                .addGap(57, 57, 57))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 10, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4))
-                                .addGap(108, 108, 108)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UpdateBlanksTable))
-                        .addContainerGap(40, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(125, 125, 125))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(57, 57, 57))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UpdateBlanksTable)
+                        .addGap(201, 201, 201))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,9 +379,18 @@ public class manageBlanks extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(UpdateAdvisorTable)
@@ -343,16 +423,103 @@ public class manageBlanks extends javax.swing.JFrame {
 
     private void UpdateAdvisorTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateAdvisorTableActionPerformed
         // TODO add your handling code here:
+            PreparedStatement ps;
+       String query="SELECT firstName, lastName, s.staffID, b.type, b.blankID, b.status FROM staff AS s INNER JOIN blanks AS b WHERE b.staffID=s.staffID";
+       
+     try{  
+         ps=MyConnection.getConnection().prepareStatement(query);
+         ResultSet rs=ps.executeQuery();
+         DefaultTableModel tm=(DefaultTableModel)AdvisorTable.getModel();
+         tm.setRowCount(0); 
+         while(rs.next()){
+             Object o[]={rs.getString("firstName"),rs.getString("lastName"),rs.getInt("s.staffID"),rs.getInt("b.type"),rs.getString("b.blankID"),rs.getString("b.status")};
+             tm.addRow(o);
+         }  
+         
+         
+    }                                           
+    catch(Exception e){
+        JOptionPane.showMessageDialog(this,e);
+    }
+    
+        
+        
     }//GEN-LAST:event_UpdateAdvisorTableActionPerformed
 
     private void UpdateBlanksTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBlanksTableActionPerformed
         // TODO add your handling code here:
+        
+      
+       
+     try{  
+        PreparedStatement ps;
+        String query="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=444;";
+         ps=MyConnection.getConnection().prepareStatement(query);
+         ResultSet rs=ps.executeQuery();
+         DefaultTableModel tm=(DefaultTableModel)BlanksTable444.getModel();
+         tm.setRowCount(0); 
+         while(rs.next()){
+             Object o[]={rs.getInt("type"),rs.getString("MIN(blankID)"),rs.getString("MAX(blankID)")};
+             tm.addRow(o);
+         }  
+         
+         PreparedStatement ps1;
+        String query1="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=440;";
+         ps1=MyConnection.getConnection().prepareStatement(query1);
+         ResultSet rs1=ps1.executeQuery();
+         DefaultTableModel tm1=(DefaultTableModel)BlanksTable440.getModel();
+         tm1.setRowCount(0); 
+         while(rs1.next()){
+             Object o[]={rs1.getInt("type"),rs1.getString("MIN(blankID)"),rs1.getString("MAX(blankID)")};
+             tm1.addRow(o);
+         }  
+         
+          PreparedStatement ps2;
+        String query2="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=420;";
+         ps2=MyConnection.getConnection().prepareStatement(query2);
+         ResultSet rs2=ps2.executeQuery();
+         DefaultTableModel tm2=(DefaultTableModel)BlanksTable420.getModel();
+         tm2.setRowCount(0); 
+         while(rs2.next()){
+             Object o[]={rs2.getInt("type"),rs2.getString("MIN(blankID)"),rs2.getString("MAX(blankID)")};
+             tm2.addRow(o);
+         }  
+         
+          PreparedStatement ps3;
+        String query3="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=201;";
+         ps3=MyConnection.getConnection().prepareStatement(query3);
+         ResultSet rs3=ps3.executeQuery();
+         DefaultTableModel tm3=(DefaultTableModel)BlanksTable201.getModel();
+         tm3.setRowCount(0); 
+         while(rs3.next()){
+             Object o[]={rs3.getInt("type"),rs3.getString("MIN(blankID)"),rs3.getString("MAX(blankID)")};
+             tm3.addRow(o);
+         }  
+         
+          PreparedStatement ps4;
+        String query4="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=101;";
+         ps4=MyConnection.getConnection().prepareStatement(query4);
+         ResultSet rs4=ps4.executeQuery();
+         DefaultTableModel tm4=(DefaultTableModel)BlanksTable101.getModel();
+         tm4.setRowCount(0); 
+         while(rs4.next()){
+             Object o[]={rs4.getInt("type"),rs4.getString("MIN(blankID)"),rs4.getString("MAX(blankID)")};
+             tm4.addRow(o);
+         }  
+         
+    }                                           
+    catch(Exception e){
+        JOptionPane.showMessageDialog(this,e);
+    }
+        
+        
     }//GEN-LAST:event_UpdateBlanksTableActionPerformed
 
     private void AddBlanksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBlanksActionPerformed
         // TODO add your handling code here:
         int btype=Integer.valueOf((String) BlanksType.getSelectedItem()); 
         int blanks=(Integer)BlanksNumber.getValue(); 
+        int bnum= Integer.parseInt(blankNumberField.getText());
    
       
         
@@ -360,7 +527,7 @@ public class manageBlanks extends javax.swing.JFrame {
             PreparedStatement ps1=MyConnection.getConnection().prepareStatement("SELECT  MAX(`blankNumber`) FROM `blanks` WHERE type="+btype+";");
             ResultSet rs=ps1.executeQuery();
                 while (rs.next()) {
-                int myvar=rs.getInt(1);
+                int myvar=bnum;
                 insert(myvar,btype,blanks);
                    System.out.println(" max in the db "+myvar);
                    
@@ -372,7 +539,12 @@ public class manageBlanks extends javax.swing.JFrame {
      }
       
     }//GEN-LAST:event_AddBlanksActionPerformed
-/* this function adds the amount of blanks that was selected in the GUI and is called by the code that check watis the lates blank that was added as a number*/
+/* this function adds the amount of blanks that was selected in the GUI and is called by the code that check watis the lates blank that was added as a number
+    myvar is 
+    btype is blank type which it should be assigend to 
+    blanks is the nubmer that follows the blank type going from the highest in the database to the number of blanks specifed 
+    myvar is the biggest blank in the databse
+    */
     public void insert(int myvar, int btype, int blanks){
          try{
             for(int i=myvar+1;i<myvar+blanks+1;i++){  
@@ -387,9 +559,7 @@ public class manageBlanks extends javax.swing.JFrame {
         for(int k=0;k<z;k++){
             blank=blank+"0";
         }
-                
-                
-         
+
              ps.setString(1,Integer.toString(btype) + blank+String.valueOf(i));
              ps.setInt(2,-1);
              ps.setInt(3,btype);
@@ -409,21 +579,83 @@ public class manageBlanks extends javax.swing.JFrame {
      }
     }
     
- 
-    
+ /*changes id from string to integer */
+     public int idtoint(String myid){ 
+         int z=3;
+       while(myid.charAt(z)!='0'){
+           z++;
+           }return Integer.parseInt(myid.substring(z));
+   }
     
     private void AssignBlanksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AssignBlanksButtonActionPerformed
         // TODO add your handling code here:
-        int adid=Integer.parseInt(AdvisorIDField.getText());
-        int bfrom=Integer.parseInt(BlankIDFromField.getText()); 
-        int bto= Integer.parseInt(BlankIDToField.getText()); 
+        String adid=AdvisorIDField.getText();
+        String bfrom=BlankIDFromField.getText(); 
+        String bto= BlankIDToField.getText(); 
+       // System.out.println(bto+bfrom);
+        
+  
+         try{
+          for(int i=idtoint(bfrom);i<idtoint(bto)+1;i++){
+            String blank=bfrom.substring(0,3);
+            int z=8-String.valueOf(i).length();
+            for(int k=0;k<z;k++){
+                blank=blank+"0";
+            }
+            blank=blank+String.valueOf(i);
+           
+           System.out.println("the where part "+blank+" the id "+adid);
+           PreparedStatement ps;
+                String query="UPDATE blanks SET staffID="+adid +" WHERE blankID="+blank+" AND staffID=-1;";
+
+                ps=MyConnection.getConnection().prepareStatement(query);
+           
+          // PreparedStatement ps=MyConnection.getConnection().prepareStatement("UPDATE blanks SET staffID="+adid+"WHERE blankID="+blank);
+           //44400000001
+            ps.execute();
+           }       
+                 System.out.println(" assigned from "+bfrom+"to"+bto+"whith advisor"+adid);
+        }catch (SQLException ex){
+         Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
+         
+     }
+        
+        
+        
     }//GEN-LAST:event_AssignBlanksButtonActionPerformed
 
     private void ReassignBlanksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReassignBlanksButtonActionPerformed
         // TODO add your handling code here:
-        int adid=Integer.parseInt(AdvisorIDField.getText());
-        int bfrom=Integer.parseInt(BlankIDFromField.getText()); 
-        int bto= Integer.parseInt(BlankIDToField.getText()); 
+        String adid=AdvisorIDField.getText();
+        String bfrom=BlankIDFromField.getText(); 
+        String bto= BlankIDToField.getText(); 
+       // System.out.println(bto+bfrom);
+        
+  
+         try{
+          for(int i=idtoint(bfrom);i<idtoint(bto)+1;i++){
+            String blank=bfrom.substring(0,3);
+            int z=8-String.valueOf(i).length();
+            for(int k=0;k<z;k++){
+                blank=blank+"0";
+            }
+            blank=blank+String.valueOf(i);
+           
+           System.out.println("the where part "+blank+" the id "+adid);
+           PreparedStatement ps;
+                String query="UPDATE blanks SET staffID="+adid +" WHERE blankID="+blank+";";
+
+                ps=MyConnection.getConnection().prepareStatement(query);
+           
+          // PreparedStatement ps=MyConnection.getConnection().prepareStatement("UPDATE blanks SET staffID="+adid+"WHERE blankID="+blank);
+           //44400000001
+            ps.execute();
+           }       
+                 System.out.println(" assigned from "+bfrom+"to"+bto+"whith advisor"+adid);
+        }catch (SQLException ex){
+         Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
+         
+     }
         
     }//GEN-LAST:event_ReassignBlanksButtonActionPerformed
 
@@ -476,11 +708,17 @@ public class manageBlanks extends javax.swing.JFrame {
     private javax.swing.JTextField BlankIDFromField;
     private javax.swing.JTextField BlankIDToField;
     private javax.swing.JSpinner BlanksNumber;
+    private javax.swing.JTable BlanksTable101;
+    private javax.swing.JTable BlanksTable201;
+    private javax.swing.JTable BlanksTable420;
+    private javax.swing.JTable BlanksTable440;
+    private javax.swing.JTable BlanksTable444;
     private javax.swing.JComboBox<String> BlanksType;
     private javax.swing.JButton MainPageButton;
     private javax.swing.JButton ReassignBlanksButton;
     private javax.swing.JButton UpdateAdvisorTable;
     private javax.swing.JButton UpdateBlanksTable;
+    private javax.swing.JTextField blankNumberField;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -495,6 +733,9 @@ public class manageBlanks extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     // End of variables declaration//GEN-END:variables
 }
