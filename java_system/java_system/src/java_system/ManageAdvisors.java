@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -87,7 +88,6 @@ public class ManageAdvisors extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         TextFieldAddress = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        TextFieldDOB = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         TextFieldTelephone = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -101,6 +101,7 @@ public class ManageAdvisors extends javax.swing.JFrame {
         ComboBoxRole = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         RemoveIcon = new javax.swing.JLabel();
+        DOB = new org.jdesktop.swingx.JXDatePicker();
         jScrollPane2 = new javax.swing.JScrollPane();
         AdvisorTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
@@ -168,45 +169,45 @@ public class ManageAdvisors extends javax.swing.JFrame {
             }
         });
 
+        DOB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DOBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel13))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TextFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextFieldPassword)
-                            .addComponent(TextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextFieldTelephone, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextFieldDOB, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextFieldAddress, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextFieldSurname, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextFieldName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(RemoveIcon)
-                                .addGap(0, 16, Short.MAX_VALUE)))))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(TextFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(TextFieldPassword)
+                        .addComponent(TextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(TextFieldTelephone, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(TextFieldAddress, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(TextFieldSurname, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(TextFieldName, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel1)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(RemoveIcon)))
+                            .addGap(0, 16, Short.MAX_VALUE))))
                 .addGap(41, 41, 41))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +216,10 @@ public class ManageAdvisors extends javax.swing.JFrame {
                         .addComponent(ComboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(SaveButton)))
+                        .addComponent(SaveButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(DOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -246,9 +250,9 @@ public class ManageAdvisors extends javax.swing.JFrame {
                 .addComponent(TextFieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextFieldDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(DOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TextFieldTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,11 +282,11 @@ public class ManageAdvisors extends javax.swing.JFrame {
 
             },
             new String [] {
-                "StaffID", "Name", "Surname", "Address", "Telephone", "Email", "Username", "Password", "Role"
+                "StaffID", "Name", "Surname", "Address", "Email", "Telephone", "Date", "Username", "Password", "Role"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -321,17 +325,16 @@ public class ManageAdvisors extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addComponent(jLabel9)
-                        .addGap(0, 1037, Short.MAX_VALUE))
+                        .addContainerGap(1058, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1302, Short.MAX_VALUE)
+                            .addComponent(ViewAdvisorTable)
+                            .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ViewAdvisorTable)
-                                    .addComponent(jLabel8))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,16 +345,14 @@ public class ManageAdvisors extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(15, 15, 15)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ViewAdvisorTable)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(ViewAdvisorTable)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -362,12 +363,15 @@ public class ManageAdvisors extends javax.swing.JFrame {
         String firstName = TextFieldName.getText();
         String lastName = TextFieldSurname.getText();
         String address = TextFieldAddress.getText();
-        String DOB = TextFieldDOB.getText();
+        
         String email = TextFieldEmail.getText();
         String username = TextFieldUsername.getText();
         String password = TextFieldPassword.getText();
         String role = (String)ComboBoxRole.getSelectedItem();
         String telephone = TextFieldTelephone.getText();
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String bdate = dateFormat.format(DOB.getDate());
         
         PreparedStatement ps;
         String query = "INSERT INTO `staff`(`staffID`, `commissionRateID`, `firstName`, `lastName`, `username`, `password`, `DOB`, `email`, `telephone`, `role`,`address`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -382,7 +386,7 @@ public class ManageAdvisors extends javax.swing.JFrame {
          ps.setString(4,lastName);
          ps.setString(5,username);
          ps.setString(6,password);
-         ps.setString(7,"2000-10-10");
+         ps.setString(7,bdate);
          ps.setString(8,email);
          ps.setString(9,telephone);
          ps.setString(10,role);
@@ -392,6 +396,8 @@ public class ManageAdvisors extends javax.swing.JFrame {
          TextFieldSurname.setText("");
          TextFieldEmail.setText("");
          TextFieldAddress.setText("");
+         
+         
          TextFieldTelephone.setText("");
          TextFieldUsername.setText("");
          TextFieldPassword.setText("");
@@ -418,17 +424,13 @@ public class ManageAdvisors extends javax.swing.JFrame {
             String email = TextFieldEmail.getText();
             String username= TextFieldUsername.getText();
             String password = TextFieldPassword.getText();
+            String role = (String)ComboBoxRole.getSelectedItem();
             
-            String query = "update staff set firstName ='"+firstName+"',lastName = '"+lastName+"', address = '"+address+"', telephone = '"+telephone+"', email = '"+email+"' username = '"+username+"', password = '"+password+"' where firstName ='"+firstName+"' ";
+            String query = "update staff set firstName = '"+firstName+"', lastName = '"+lastName+"', telephone = '"+telephone+"',address = '"+address+"', email = '"+email+"', username = '"+username+"', password = '"+password+"',role = '"+role+"' where firstName ='"+firstName+"' ";
             pst = con.prepareStatement(query);
             pst.execute();
-          /*
-            pst.setString(2,TextFieldSurname.getText());
-            pst.setString(3,TextFieldPassword.getText());
-            pst.setString(4,TextFieldEmail.getText());
-            pst.setString(5,TextFieldTelephone.getText());
-            pst.setString(6,TextFieldAddress.getText());
-*/
+          
+           
 
             JOptionPane.showMessageDialog(null, "Updated");
             
@@ -450,7 +452,7 @@ public class ManageAdvisors extends javax.swing.JFrame {
             DefaultTableModel tm = (DefaultTableModel)AdvisorTable.getModel();
             if(rs.next()){
 
-                String firstName = rs.getString("firstName");
+                String firstName = (String)rs.getString("firstName");
                 String lastName = rs.getString("lastName");
                 String address = rs.getString("address");
                 //date
@@ -458,15 +460,22 @@ public class ManageAdvisors extends javax.swing.JFrame {
                 String email = rs.getString("email");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                String role = rs.getString("role");
+                String  role = rs.getString("role");
+                
+                String bdate = rs.getString("DOB");
+                java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(bdate);
+
                 
                 TextFieldName.setText(firstName);
+                
                 TextFieldSurname.setText(lastName);
                 TextFieldAddress.setText(address);
                 TextFieldTelephone.setText(telephone);
                 TextFieldEmail.setText(email);
                 TextFieldUsername.setText(username);
                 TextFieldPassword.setText(password);
+                DOB.setDate(date);
+               // DOB.setDate(date);
                 
                 
             }
@@ -497,16 +506,20 @@ public class ManageAdvisors extends javax.swing.JFrame {
 
     private void ViewAdvisorTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAdvisorTableActionPerformed
         // TODO add your handling code here:
+        //PreparedStatement ps;
+        //String query ="SELECT staffID, firstName, lastName, address, email, telephone,DOB,username,password,role FROM staff";
 
         //DefaultTableModel tableModel = (DefaultTableModel) AdvisorTable.getModel();
         try{
 
-            String query = "SELECT staffID, firstName, lastName, address, email, telephone,username,password FROM staff";
+            
+            String query = "SELECT staffID, firstName, lastName, address, email, telephone,DOB,username,password,role FROM staff";
             con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
             pst = con.prepareStatement(query);
             rs = pst.executeQuery();
             DefaultTableModel tm = (DefaultTableModel) AdvisorTable.getModel();
             tm.setRowCount(0);
+            
 
             
             while (rs.next())
@@ -520,17 +533,22 @@ public class ManageAdvisors extends javax.swing.JFrame {
                 String telephone = rs.getString("telephone");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                //  String role = (Strig)ComboBoxRole.getSelectedItem();
+                String bdate = rs.getString("DOB");
+                String role = (String)ComboBoxRole.getSelectedItem();
 
                 
-                tm.addRow(new Object[]{staffID,firstName,lastName,address,email,telephone,username,password});
+                tm.addRow(new Object[]{staffID,firstName,lastName,address,email,telephone,bdate,username,password,role});
                 
             }
 
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(this,e);
         }
     }//GEN-LAST:event_ViewAdvisorTableActionPerformed
+
+    private void DOBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DOBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DOBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -570,10 +588,10 @@ public class ManageAdvisors extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AdvisorTable;
     private javax.swing.JComboBox<String> ComboBoxRole;
+    private org.jdesktop.swingx.JXDatePicker DOB;
     private javax.swing.JLabel RemoveIcon;
     private javax.swing.JButton SaveButton;
     private javax.swing.JTextField TextFieldAddress;
-    private javax.swing.JTextField TextFieldDOB;
     private javax.swing.JTextField TextFieldEmail;
     private javax.swing.JTextField TextFieldName;
     private javax.swing.JTextField TextFieldPassword;
