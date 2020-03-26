@@ -5,6 +5,7 @@
  */
 package java_system;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,6 +49,9 @@ public class manageBlanks extends javax.swing.JFrame {
         ReassignBlanksButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        BlankToLable = new javax.swing.JLabel();
+        BlankFromLable = new javax.swing.JLabel();
+        AdvisorIDLable = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -62,6 +66,7 @@ public class manageBlanks extends javax.swing.JFrame {
         BlanksType = new javax.swing.JComboBox<>();
         AddBlanks = new javax.swing.JButton();
         blankNumberField = new javax.swing.JTextField();
+        BlankNumberLable = new javax.swing.JLabel();
         UpdateAdvisorTable = new javax.swing.JButton();
         UpdateBlanksTable = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -85,7 +90,25 @@ public class manageBlanks extends javax.swing.JFrame {
 
         jLabel2.setText("AdvisorID: ");
 
+        AdvisorIDField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                AdvisorIDFieldKeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("BlankID:");
+
+        BlankIDFromField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BlankIDFromFieldKeyReleased(evt);
+            }
+        });
+
+        BlankIDToField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BlankIDToFieldKeyReleased(evt);
+            }
+        });
 
         AssignBlanksButton.setText("Assign Blanks");
         AssignBlanksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +148,10 @@ public class manageBlanks extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(BlankIDFromField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AdvisorIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(AdvisorIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BlankToLable)
+                            .addComponent(BlankFromLable)
+                            .addComponent(AdvisorIDLable)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(AssignBlanksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,21 +162,27 @@ public class manageBlanks extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AdvisorIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(AdvisorIDLable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BlankIDFromField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BlankFromLable)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BlankIDToField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BlankToLable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AssignBlanksButton)
                     .addComponent(ReassignBlanksButton))
@@ -213,22 +245,33 @@ public class manageBlanks extends javax.swing.JFrame {
             }
         });
 
+        blankNumberField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                blankNumberFieldKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(BlanksType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(blankNumberField)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BlanksNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(114, 114, 114)
                 .addComponent(AddBlanks)
                 .addContainerGap(104, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(BlanksType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(BlankNumberLable)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(blankNumberField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BlanksNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,7 +281,9 @@ public class manageBlanks extends javax.swing.JFrame {
                     .addComponent(BlanksNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BlanksType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(blankNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BlankNumberLable)
+                .addGap(19, 19, 19)
                 .addComponent(AddBlanks)
                 .addContainerGap(69, Short.MAX_VALUE))
         );
@@ -345,16 +390,12 @@ public class manageBlanks extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(UpdateBlanksTable)
                         .addGap(201, 201, 201))))
         );
@@ -372,10 +413,10 @@ public class manageBlanks extends javax.swing.JFrame {
                             .addComponent(MainPageButton))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -425,9 +466,12 @@ public class manageBlanks extends javax.swing.JFrame {
         // TODO add your handling code here:
             PreparedStatement ps;
        String query="SELECT firstName, lastName, s.staffID, b.type, b.blankID, b.status FROM staff AS s INNER JOIN blanks AS b WHERE b.staffID=s.staffID";
+       Connection con =null;
        
      try{  
-         ps=MyConnection.getConnection().prepareStatement(query);
+         con=MyConnection.getConnection();
+         System.out.println("Get Connection");
+         ps=con.prepareStatement(query);
          ResultSet rs=ps.executeQuery();
          DefaultTableModel tm=(DefaultTableModel)AdvisorTable.getModel();
          tm.setRowCount(0); 
@@ -435,26 +479,31 @@ public class manageBlanks extends javax.swing.JFrame {
              Object o[]={rs.getString("firstName"),rs.getString("lastName"),rs.getInt("s.staffID"),rs.getInt("b.type"),rs.getString("b.blankID"),rs.getString("b.status")};
              tm.addRow(o);
          }  
-         
+          con.close();
+                 System.out.println("Close Connection");
          
     }                                           
     catch(Exception e){
         JOptionPane.showMessageDialog(this,e);
-    }
-    
-        
+    }finally{
+         
+         
+         
+     }   
         
     }//GEN-LAST:event_UpdateAdvisorTableActionPerformed
 
     private void UpdateBlanksTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBlanksTableActionPerformed
         // TODO add your handling code here:
         
-      
+      Connection con=null;
        
      try{  
+         con=MyConnection.getConnection();
+         System.out.println("Get Connection");
         PreparedStatement ps;
         String query="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=444;";
-         ps=MyConnection.getConnection().prepareStatement(query);
+         ps=con.prepareStatement(query);
          ResultSet rs=ps.executeQuery();
          DefaultTableModel tm=(DefaultTableModel)BlanksTable444.getModel();
          tm.setRowCount(0); 
@@ -465,7 +514,7 @@ public class manageBlanks extends javax.swing.JFrame {
          
          PreparedStatement ps1;
         String query1="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=440;";
-         ps1=MyConnection.getConnection().prepareStatement(query1);
+         ps1=con.prepareStatement(query1);
          ResultSet rs1=ps1.executeQuery();
          DefaultTableModel tm1=(DefaultTableModel)BlanksTable440.getModel();
          tm1.setRowCount(0); 
@@ -476,7 +525,7 @@ public class manageBlanks extends javax.swing.JFrame {
          
           PreparedStatement ps2;
         String query2="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=420;";
-         ps2=MyConnection.getConnection().prepareStatement(query2);
+         ps2=con.prepareStatement(query2);
          ResultSet rs2=ps2.executeQuery();
          DefaultTableModel tm2=(DefaultTableModel)BlanksTable420.getModel();
          tm2.setRowCount(0); 
@@ -487,7 +536,7 @@ public class manageBlanks extends javax.swing.JFrame {
          
           PreparedStatement ps3;
         String query3="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=201;";
-         ps3=MyConnection.getConnection().prepareStatement(query3);
+         ps3=con.prepareStatement(query3);
          ResultSet rs3=ps3.executeQuery();
          DefaultTableModel tm3=(DefaultTableModel)BlanksTable201.getModel();
          tm3.setRowCount(0); 
@@ -498,7 +547,7 @@ public class manageBlanks extends javax.swing.JFrame {
          
           PreparedStatement ps4;
         String query4="SELECT type, MAX(blankID),MIN(blankID) FROM `blanks` WHERE type=101;";
-         ps4=MyConnection.getConnection().prepareStatement(query4);
+         ps4=con.prepareStatement(query4);
          ResultSet rs4=ps4.executeQuery();
          DefaultTableModel tm4=(DefaultTableModel)BlanksTable101.getModel();
          tm4.setRowCount(0); 
@@ -510,13 +559,33 @@ public class manageBlanks extends javax.swing.JFrame {
     }                                           
     catch(Exception e){
         JOptionPane.showMessageDialog(this,e);
-    }
+    }finally{
+         if(con!=null){
+             try {
+                 con.close();
+                 System.out.println("Close Connection");
+             } catch (SQLException ex) {
+                 Logger.getLogger(manageBlanks.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             
+         }
+     }
         
         
     }//GEN-LAST:event_UpdateBlanksTableActionPerformed
 
     private void AddBlanksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBlanksActionPerformed
         // TODO add your handling code here:
+        if(blankNumberField.getText().trim().isEmpty()){
+            BlankNumberLable.setText("Blank number is empty");
+            
+        }else if(blankNumberField.getText().length()!=8){
+            JOptionPane.showMessageDialog(null,"Wrong Length for the Blank Number "+blankNumberField.getText().length());
+            
+        }
+        
+        Connection con=null;
+        
         int btype=Integer.valueOf((String) BlanksType.getSelectedItem()); 
         int blanks=(Integer)BlanksNumber.getValue(); 
         int bnum= Integer.parseInt(blankNumberField.getText());
@@ -524,18 +593,23 @@ public class manageBlanks extends javax.swing.JFrame {
       
         
         try{
-            PreparedStatement ps1=MyConnection.getConnection().prepareStatement("SELECT  MAX(`blankNumber`) FROM `blanks` WHERE type="+btype+";");
+            con=MyConnection.getConnection();
+            PreparedStatement ps1=con.prepareStatement("SELECT  MAX(`blankNumber`) FROM `blanks` WHERE type="+btype+";");
             ResultSet rs=ps1.executeQuery();
                 while (rs.next()) {
                 int myvar=bnum;
-                insert(myvar,btype,blanks);
-                   System.out.println(" max in the db "+myvar);
-                   
+                insert(myvar,btype,blanks,con);
+                   System.out.println(" max in the db "+myvar); 
+                    con=MyConnection.getConnection();
                 }
-         
-     }catch (SQLException ex){
+                 if(ps1.executeUpdate()>0){
+             JOptionPane.showMessageDialog(null,"Blanks Added");
+         }else{
+                 }
+        }catch (SQLException ex){
+          //JOptionPane.showMessageDialog(null,"Wrong Input in the ID field"); 
          Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
-         
+            
      }
       
     }//GEN-LAST:event_AddBlanksActionPerformed
@@ -545,16 +619,15 @@ public class manageBlanks extends javax.swing.JFrame {
     blanks is the nubmer that follows the blank type going from the highest in the database to the number of blanks specifed 
     myvar is the biggest blank in the databse
     */
-    public void insert(int myvar, int btype, int blanks){
+    public void insert(int myvar, int btype, int blanks,Connection con){
          try{
-            for(int i=myvar+1;i<myvar+blanks+1;i++){  
+            for(int i=myvar;i<myvar+blanks+1;i++){  
                 PreparedStatement ps;
                 String query="INSERT INTO `blanks`(`blankID`, `staffID`, `type`, `status`, `blankNumber`, `commissionRate`, `dateRecieved`, `dateAssigned`) VALUES (?,?,?,?,?,?,?,?)";
-
-                ps=MyConnection.getConnection().prepareStatement(query);
+                ps=con.prepareStatement(query);
                 
                 
-                 String blank="";
+        String blank="";
         int z=8-String.valueOf(i).length();
         for(int k=0;k<z;k++){
             blank=blank+"0";
@@ -569,9 +642,19 @@ public class manageBlanks extends javax.swing.JFrame {
              ps.setString(7,"2000-12-23");
              ps.setString(8,"2000-12-23");
          if(ps.executeUpdate()>0){
-             JOptionPane.showMessageDialog(null,"Blank added");
+             System.out.println("Blank added "+i);
+             //JOptionPane.showMessageDialog(null,"Blank added");
          }
             }
+             if(con!=null){
+                 try {
+                     con.close();
+                 } catch (SQLException ex) {
+                     Logger.getLogger(manageBlanks.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+             }
+            
+            
          
      }catch (SQLException ex){
          Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
@@ -589,13 +672,45 @@ public class manageBlanks extends javax.swing.JFrame {
     
     private void AssignBlanksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AssignBlanksButtonActionPerformed
         // TODO add your handling code here:
+        if(AdvisorIDField.getText().trim().isEmpty() && BlankIDFromField.getText().trim().isEmpty() && BlankIDToField.getText().trim().isEmpty()){
+            AdvisorIDLable.setText("Advisor ID is empty");
+            BlankToLable.setText("Blank To is empty");
+            BlankFromLable.setText("Blank From is empty");
+        }
+        else if(AdvisorIDField.getText().trim().isEmpty() && BlankIDFromField.getText().trim().isEmpty()){
+            BlankFromLable.setText("Blank From is empty");
+            AdvisorIDLable.setText("Advisor ID is empty");
+        }
+         else if(AdvisorIDField.getText().trim().isEmpty() && BlankIDToField.getText().trim().isEmpty()){
+            BlankToLable.setText("Blank To is empty");
+            AdvisorIDLable.setText("Advisor ID is empty");
+        }
+         else if(BlankIDFromField.getText().trim().isEmpty() && BlankIDToField.getText().trim().isEmpty()){
+            BlankToLable.setText("Blank To is empty");
+            BlankFromLable.setText("Blank From is empty");
+        }
+        else if(BlankIDFromField.getText().trim().isEmpty()){
+            BlankFromLable.setText("Blank From is empty");
+        }
+        else if(BlankIDToField.getText().trim().isEmpty()){
+             BlankToLable.setText("Blank To is empty");
+        }
+         else if(AdvisorIDField.getText().trim().isEmpty()){
+             BlankToLable.setText("Blank To is empty");
+             AdvisorIDLable.setText("Advisor ID is empty");
+        }
+        
+        
+        
         String adid=AdvisorIDField.getText();
         String bfrom=BlankIDFromField.getText(); 
         String bto= BlankIDToField.getText(); 
        // System.out.println(bto+bfrom);
-        
+        Connection con=null;
   
          try{
+             con=MyConnection.getConnection();
+             System.out.println("Get Connection");
           for(int i=idtoint(bfrom);i<idtoint(bto)+1;i++){
             String blank=bfrom.substring(0,3);
             int z=8-String.valueOf(i).length();
@@ -608,12 +723,15 @@ public class manageBlanks extends javax.swing.JFrame {
            PreparedStatement ps;
                 String query="UPDATE blanks SET staffID="+adid +" WHERE blankID="+blank+" AND staffID=-1;";
 
-                ps=MyConnection.getConnection().prepareStatement(query);
+                ps=con.prepareStatement(query);
            
           // PreparedStatement ps=MyConnection.getConnection().prepareStatement("UPDATE blanks SET staffID="+adid+"WHERE blankID="+blank);
            //44400000001
             ps.execute();
+           
            }       
+           con.close();
+            System.out.println("Close Connection");
                  System.out.println(" assigned from "+bfrom+"to"+bto+"whith advisor"+adid);
         }catch (SQLException ex){
          Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
@@ -626,13 +744,46 @@ public class manageBlanks extends javax.swing.JFrame {
 
     private void ReassignBlanksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReassignBlanksButtonActionPerformed
         // TODO add your handling code here:
+         if(AdvisorIDField.getText().trim().isEmpty() && BlankIDFromField.getText().trim().isEmpty() && BlankIDToField.getText().trim().isEmpty()){
+            AdvisorIDLable.setText("Advisor ID is empty");
+            BlankToLable.setText("Blank To is empty");
+            BlankFromLable.setText("Blank From is empty");
+        }
+        else if(AdvisorIDField.getText().trim().isEmpty() && BlankIDFromField.getText().trim().isEmpty()){
+            BlankFromLable.setText("Blank From is empty");
+            AdvisorIDLable.setText("Advisor ID is empty");
+        }
+         else if(AdvisorIDField.getText().trim().isEmpty() && BlankIDToField.getText().trim().isEmpty()){
+            BlankToLable.setText("Blank To is empty");
+            AdvisorIDLable.setText("Advisor ID is empty");
+        }
+         else if(BlankIDFromField.getText().trim().isEmpty() && BlankIDToField.getText().trim().isEmpty()){
+            BlankToLable.setText("Blank To is empty");
+            BlankFromLable.setText("Blank From is empty");
+        }
+        else if(BlankIDFromField.getText().trim().isEmpty()){
+            BlankFromLable.setText("Blank From is empty");
+        }
+        else if(BlankIDToField.getText().trim().isEmpty()){
+             BlankToLable.setText("Blank To is empty");
+        }
+         else if(AdvisorIDField.getText().trim().isEmpty()){
+             BlankToLable.setText("Blank To is empty");
+             AdvisorIDLable.setText("Advisor ID is empty");
+        }
+        
+        
+        
+        
         String adid=AdvisorIDField.getText();
         String bfrom=BlankIDFromField.getText(); 
         String bto= BlankIDToField.getText(); 
        // System.out.println(bto+bfrom);
-        
+        Connection con=null;
   
          try{
+             con=MyConnection.getConnection();
+             System.out.println("Get Connection");
           for(int i=idtoint(bfrom);i<idtoint(bto)+1;i++){
             String blank=bfrom.substring(0,3);
             int z=8-String.valueOf(i).length();
@@ -645,12 +796,14 @@ public class manageBlanks extends javax.swing.JFrame {
            PreparedStatement ps;
                 String query="UPDATE blanks SET staffID="+adid +" WHERE blankID="+blank+";";
 
-                ps=MyConnection.getConnection().prepareStatement(query);
+                ps=con.prepareStatement(query);
            
           // PreparedStatement ps=MyConnection.getConnection().prepareStatement("UPDATE blanks SET staffID="+adid+"WHERE blankID="+blank);
            //44400000001
             ps.execute();
            }       
+          con.close();
+           System.out.println("Close Connection");
                  System.out.println(" assigned from "+bfrom+"to"+bto+"whith advisor"+adid);
         }catch (SQLException ex){
          Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
@@ -664,6 +817,26 @@ public class manageBlanks extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_BlanksTypeActionPerformed
+
+    private void AdvisorIDFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AdvisorIDFieldKeyReleased
+        // TODO add your handling code here:
+        AdvisorIDLable.setText("");
+    }//GEN-LAST:event_AdvisorIDFieldKeyReleased
+
+    private void BlankIDFromFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BlankIDFromFieldKeyReleased
+        // TODO add your handling code here:
+        BlankFromLable.setText("");
+    }//GEN-LAST:event_BlankIDFromFieldKeyReleased
+
+    private void BlankIDToFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BlankIDToFieldKeyReleased
+        // TODO add your handling code here:
+        BlankToLable.setText("");
+    }//GEN-LAST:event_BlankIDToFieldKeyReleased
+
+    private void blankNumberFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_blankNumberFieldKeyReleased
+        // TODO add your handling code here:
+        BlankNumberLable.setText("");
+    }//GEN-LAST:event_blankNumberFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -703,10 +876,14 @@ public class manageBlanks extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddBlanks;
     private javax.swing.JTextField AdvisorIDField;
+    private javax.swing.JLabel AdvisorIDLable;
     private javax.swing.JTable AdvisorTable;
     private javax.swing.JButton AssignBlanksButton;
+    private javax.swing.JLabel BlankFromLable;
     private javax.swing.JTextField BlankIDFromField;
     private javax.swing.JTextField BlankIDToField;
+    private javax.swing.JLabel BlankNumberLable;
+    private javax.swing.JLabel BlankToLable;
     private javax.swing.JSpinner BlanksNumber;
     private javax.swing.JTable BlanksTable101;
     private javax.swing.JTable BlanksTable201;

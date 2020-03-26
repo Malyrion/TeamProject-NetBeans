@@ -128,22 +128,26 @@ public class loginFrame extends javax.swing.JFrame {
             rs = pst.executeQuery();
             if(rs.next()){
                 JOptionPane.showMessageDialog(this, "Username and Password is correct and you are logged as "+rs.getString("role"));
-            if(jComboBoxUserType.getSelectedIndex()==0){
-                systemAdmin admin = new systemAdmin();
-                admin.setVisible(true);
-                this.setVisible(false);
-                admin.setLocationRelativeTo(null);
-            }else if(jComboBoxUserType.getSelectedIndex()==1){
-                officeManager manager = new officeManager();
-                manager.setVisible(true);
-                this.setVisible(false);
-                manager.setLocationRelativeTo(null);
-            } else{
-                travelAd advisor = new travelAd();
-                advisor.setVisible(true);
-                this.setVisible(false);
-                advisor.setLocationRelativeTo(null);
-            } 
+                switch (jComboBoxUserType.getSelectedIndex()) {
+                    case 0:
+                        systemAdmin admin = new systemAdmin();
+                        admin.setVisible(true);
+                        this.setVisible(false);
+                        admin.setLocationRelativeTo(null);
+                        break;
+                    case 1:
+                        officeManager manager = new officeManager();
+                        manager.setVisible(true);
+                        this.setVisible(false);
+                        manager.setLocationRelativeTo(null);
+                        break;
+                    default:
+                        travelAd advisor = new travelAd();
+                        advisor.setVisible(true); 
+                        this.setVisible(false);
+                        advisor.setLocationRelativeTo(null);
+                        break;
+                }
             
             }
             else{
