@@ -40,8 +40,6 @@ public class loginFrame extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBoxUserType = new javax.swing.JComboBox<>();
         jTextFieldPassword = new javax.swing.JTextField();
         jTextFieldUsername = new javax.swing.JTextField();
         jButtonLogin = new javax.swing.JButton();
@@ -53,15 +51,6 @@ public class loginFrame extends javax.swing.JFrame {
         jLabel1.setText("Username:");
 
         jLabel2.setText("Password:");
-
-        jLabel3.setText("Select user type:");
-
-        jComboBoxUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System_Administrator", "Office_Manager", "Travel_Advisor" }));
-        jComboBoxUserType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxUserTypeActionPerformed(evt);
-            }
-        });
 
         jButtonLogin.setText("Login");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -75,27 +64,24 @@ public class loginFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                            .addComponent(jTextFieldPassword)
-                            .addComponent(jComboBoxUserType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(jButtonLogin)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(231, 231, 231)
+                .addComponent(jButtonLogin)
+                .addContainerGap(210, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldUsername)
+                    .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(87, 87, 87)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -103,11 +89,7 @@ public class loginFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBoxUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
+                .addGap(63, 63, 63)
                 .addComponent(jButtonLogin)
                 .addContainerGap(69, Short.MAX_VALUE))
         );
@@ -130,23 +112,24 @@ public class loginFrame extends javax.swing.JFrame {
         
         
         try{
-            String query = "SELECT * FROM `staff` WHERE username =? and password=? and role =?";
+            String query = "SELECT * FROM `staff` WHERE username =? and password=?";
             con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
             pst = con.prepareStatement(query);
             pst.setString(1,jTextFieldUsername.getText());
             pst.setString(2,jTextFieldPassword.getText());
-            pst.setString(3, String.valueOf(jComboBoxUserType.getSelectedItem()));
             rs = pst.executeQuery();
+            
+           
             if(rs.next()){
-                JOptionPane.showMessageDialog(this, "Username and Password is correct and you are logged as "+rs.getString("role"));
-                switch (jComboBoxUserType.getSelectedIndex()) {
-                    case 0:
+                //JOptionPane.showMessageDialog(this, "Username and Password is correct and you are logged as "+rs.getString("role"));
+                switch (rs.getString("userType")) {
+                    case "System_Administrator":
                         systemAdmin admin = new systemAdmin();
                         admin.setVisible(true);
                         this.setVisible(false);
                         admin.setLocationRelativeTo(null);
                         break;
-                    case 1:
+                    case "Office_Manager":
                         officeManager manager = new officeManager();
                         manager.setVisible(true);
                         this.setVisible(false);
@@ -168,10 +151,6 @@ public class loginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());}
     }//GEN-LAST:event_jButtonLoginActionPerformed
     }
-    private void jComboBoxUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUserTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxUserTypeActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -209,10 +188,8 @@ public class loginFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;
-    private javax.swing.JComboBox<String> jComboBoxUserType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JTextField jTextFieldPassword;
     private javax.swing.JTextField jTextFieldUsername;

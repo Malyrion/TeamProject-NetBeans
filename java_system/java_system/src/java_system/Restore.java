@@ -103,8 +103,6 @@ public class Restore extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBoxUserType = new javax.swing.JComboBox<>();
         jTextFieldPassword = new javax.swing.JTextField();
         jTextFieldUsername = new javax.swing.JTextField();
         jButtonLogin = new javax.swing.JButton();
@@ -136,15 +134,6 @@ public class Restore extends javax.swing.JFrame {
 
         jLabel5.setText("Password:");
 
-        jLabel3.setText("Select user type:");
-
-        jComboBoxUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System_Administrator", "Office_Manager", "Travel_Advisor" }));
-        jComboBoxUserType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxUserTypeActionPerformed(evt);
-            }
-        });
-
         jButtonLogin.setText("Login");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,23 +148,12 @@ public class Restore extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel1))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldUsername)
-                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxUserType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
+                        .addGap(366, 366, 366)
                         .addComponent(jButtonLogin))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(227, 227, 227)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -185,7 +163,15 @@ public class Restore extends javax.swing.JFrame {
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton4)
-                                        .addGap(24, 24, 24)))))))
+                                        .addGap(24, 24, 24))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel1))
+                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldUsername)
+                                    .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(164, 164, 164)
                 .addComponent(jLabel12)
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -205,7 +191,7 @@ public class Restore extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(11, 11, 11)
                 .addComponent(jButton4)
-                .addGap(31, 31, 31)
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,10 +199,6 @@ public class Restore extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBoxUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
                 .addComponent(jButtonLogin)
                 .addGap(35, 35, 35))
@@ -270,50 +252,59 @@ public class Restore extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jComboBoxUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUserTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxUserTypeActionPerformed
-
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         // TODO add your handling code here:
 
+        if(jTextFieldUsername.getText().toString().equals("123456789") && 
+                jTextFieldPassword.getText().toString().equals("123456789")){
+        Restore ta =new Restore();
+        ta.setVisible(true);
+        ta.pack();
+        ta.setLocationRelativeTo(null); //puts in the center of the screen
+      //  sls.setDefultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose(); //hides previos page
+        }else{
+        
+        
         try{
-            String query = "SELECT * FROM `staff` WHERE username =? and password=? and role =?";
+            String query = "SELECT * FROM `staff` WHERE username =? and password=?";
             con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
             pst = con.prepareStatement(query);
             pst.setString(1,jTextFieldUsername.getText());
             pst.setString(2,jTextFieldPassword.getText());
-            pst.setString(3, String.valueOf(jComboBoxUserType.getSelectedItem()));
             rs = pst.executeQuery();
+            
+           
             if(rs.next()){
-                JOptionPane.showMessageDialog(this, "Username and Password is correct and you are logged as "+rs.getString("role"));
-                switch (jComboBoxUserType.getSelectedIndex()) {
-                    case 0:
-                    systemAdmin admin = new systemAdmin();
-                    admin.setVisible(true);
-                    this.setVisible(false);
-                    admin.setLocationRelativeTo(null);
-                    break;
-                    case 1:
-                    officeManager manager = new officeManager();
-                    manager.setVisible(true);
-                    this.setVisible(false);
-                    manager.setLocationRelativeTo(null);
-                    break;
+                //JOptionPane.showMessageDialog(this, "Username and Password is correct and you are logged as "+rs.getString("role"));
+                switch (rs.getString("userType")) {
+                    case "System_Administrator":
+                        systemAdmin admin = new systemAdmin();
+                        admin.setVisible(true);
+                        this.setVisible(false);
+                        admin.setLocationRelativeTo(null);
+                        break;
+                    case "Office_Manager":
+                        officeManager manager = new officeManager();
+                        manager.setVisible(true);
+                        this.setVisible(false);
+                        manager.setLocationRelativeTo(null);
+                        break;
                     default:
-                    travelAd advisor = new travelAd();
-                    advisor.setVisible(true);
-                    this.setVisible(false);
-                    advisor.setLocationRelativeTo(null);
-                    break;
+                        travelAd advisor = new travelAd();
+                        advisor.setVisible(true); 
+                        this.setVisible(false);
+                        advisor.setLocationRelativeTo(null);
+                        break;
                 }
-
+            
             }
             else{
                 JOptionPane.showMessageDialog(this, "Username and Password doesn't match");}
-        }
+        } 
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());}
+    }   
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     /**
@@ -362,11 +353,9 @@ public class Restore extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonLogin;
-    private javax.swing.JComboBox<String> jComboBoxUserType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldPassword;
