@@ -116,7 +116,18 @@ public class loginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        // TODO add your handling code here:
+        //Emergency restore function username and password. Putting them in would take
+        //the user to the restore page. 
+        if(jTextFieldUsername.getText().toString().equals("123456789") && 
+                jTextFieldPassword.getText().toString().equals("123456789")){
+        Restore ta =new Restore();
+        ta.setVisible(true);
+        ta.pack();
+        ta.setLocationRelativeTo(null); //puts in the center of the screen
+      //  sls.setDefultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose(); //hides previos page
+        }else{
+        
         
         try{
             String query = "SELECT * FROM `staff` WHERE username =? and password=? and role =?";
@@ -156,7 +167,7 @@ public class loginFrame extends javax.swing.JFrame {
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());}
     }//GEN-LAST:event_jButtonLoginActionPerformed
-
+    }
     private void jComboBoxUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUserTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxUserTypeActionPerformed
