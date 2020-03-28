@@ -265,6 +265,12 @@ public class RecordPayment extends javax.swing.JFrame {
 
         jLabel9.setText("Surname:");
 
+        CashNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CashNameFieldActionPerformed(evt);
+            }
+        });
+
         CashSurnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CashSurnameFieldActionPerformed(evt);
@@ -651,12 +657,18 @@ public class RecordPayment extends javax.swing.JFrame {
          con.close();
          System.out.println("Close Connection");
          
+         
     }//GEN-LAST:event_TableButtonActionPerformed
-    catch(Exception e){
+      catch(Exception e){
         JOptionPane.showMessageDialog(this,e);
     }
-    
 }
+    private void CashNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CashNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CashNameFieldActionPerformed
+   
+    
+
     /**
      * @param args the command line arguments
      */

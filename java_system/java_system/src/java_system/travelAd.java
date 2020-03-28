@@ -5,6 +5,15 @@
  */
 package java_system;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Vu Pham
@@ -34,10 +43,11 @@ public class travelAd extends javax.swing.JFrame {
         SellTicketButton = new javax.swing.JButton();
         ManageCustomersButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ExchangeRateTable = new javax.swing.JTable();
-        ExchangeRateField = new javax.swing.JTextField();
         UpdateExchangeRateButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         SalesReportButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         RefundTicketButton = new javax.swing.JButton();
@@ -86,52 +96,62 @@ public class travelAd extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 51));
 
-        ExchangeRateTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null}
-            },
-            new String [] {
-                "Exchange Rate"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Float.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        UpdateExchangeRateButton.setText("Update Exchange Rate");
+        UpdateExchangeRateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateExchangeRateButtonActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(ExchangeRateTable);
-        if (ExchangeRateTable.getColumnModel().getColumnCount() > 0) {
-            ExchangeRateTable.getColumnModel().getColumn(0).setResizable(false);
-        }
 
-        UpdateExchangeRateButton.setText("Update Exchange Rate");
+        jLabel4.setFont(new java.awt.Font("MS UI Gothic", 0, 14)); // NOI18N
+        jLabel4.setText("Exchange Rate :");
+
+        jLabel5.setFont(new java.awt.Font("MS UI Gothic", 0, 14)); // NOI18N
+        jLabel5.setText("Currency Code (IATA) :");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ExchangeRateField)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(UpdateExchangeRateButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ExchangeRateField, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(UpdateExchangeRateButton)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -165,7 +185,7 @@ public class travelAd extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(TicketNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3))))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +210,7 @@ public class travelAd extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,9 +262,8 @@ public class travelAd extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
@@ -279,7 +298,7 @@ public class travelAd extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -334,7 +353,7 @@ public class travelAd extends javax.swing.JFrame {
         isr.setLocationRelativeTo(null); //puts in the center of the screen
       //  sls.setDefultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose(); //hides previos page
-        
+
     }//GEN-LAST:event_SalesReportButtonActionPerformed
 
     private void RecordPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecordPaymentButtonActionPerformed
@@ -351,10 +370,50 @@ public class travelAd extends javax.swing.JFrame {
         lf.setVisible(true);
         lf.pack();
         lf.setLocationRelativeTo(null);
-        this.dispose();   
-        
-        
+        this.dispose();
+
+
     }//GEN-LAST:event_LogOutButtonActionPerformed
+
+    private void UpdateExchangeRateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateExchangeRateButtonActionPerformed
+        // TODO add your handling code here:
+    String[] exchangeRateLog = {jTextField1.getText(),jTextField2.getText()};
+    CreateLog.writeLog("C:/Users/katoj/Desktop/"
+                    + "TeamProject-NetBeans-master/java_system/java_system/ExchangeRateLog.txt"
+                    ,exchangeRateLog);
+    Connection con=null;
+    PreparedStatement ps;
+    String query="INSERT INTO `exchangerate`(`exchangeRateID`, `exchangeRate`, "
+           + "`currencyCode`, `date`) VALUES (?,?,?,?)";
+
+    try{
+        con=MyConnection.getConnection();
+        ps=con.prepareStatement(query);
+
+        ps.setInt(1,(int) (Math.random() * ( 9999 - 1000 )));
+        ps.setFloat(2,Float.valueOf(jTextField1.getText()));
+        ps.setString(3,jTextField2.getText());
+        ps.setString(4,new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date()));
+
+        if(ps.executeUpdate()>0){
+            JOptionPane.showMessageDialog(null,"Exchange Rate Recorded");
+            con.close();
+            System.out.println("Close Connection");
+        }
+
+    }catch (SQLException ex){
+     Logger.getLogger(RecordPayment.class.getName()).log(Level.SEVERE,null,ex);
+
+ }
+    }//GEN-LAST:event_UpdateExchangeRateButtonActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,7 +422,7 @@ public class travelAd extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -393,8 +452,6 @@ public class travelAd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField BlankNumberField;
-    private javax.swing.JTextField ExchangeRateField;
-    private javax.swing.JTable ExchangeRateTable;
     private javax.swing.JButton LogOutButton;
     private javax.swing.JButton MainPageButton;
     private javax.swing.JButton ManageCustomersButton;
@@ -408,10 +465,13 @@ public class travelAd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
