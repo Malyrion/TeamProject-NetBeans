@@ -267,7 +267,7 @@ public class Restore extends javax.swing.JFrame {
         
         
         try{
-            String query = "SELECT * FROM `staff` WHERE username =? and password=?";
+            String query = "SELECT * FROM `users` WHERE username =? and password=?";
             con = DriverManager.getConnection("jdbc:mysql://localhost/java_system_db", "root", "");
             pst = con.prepareStatement(query);
             pst.setString(1,jTextFieldUsername.getText());
